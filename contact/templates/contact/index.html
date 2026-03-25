@@ -1,12 +1,12 @@
 {% extends "global/base.html" %}
 
-{% block texto %}
+{% block content %}
 
-<h1>{{exemplo}}</h1>
+{% for contact in contacts %}
+{{contact.first_name}} <br>
+{% endfor %}
 
-<h2>{{outro_exemplo}}</h2>
-
-{% endblock texto %}
+{% endblock content %}
 
 
 
