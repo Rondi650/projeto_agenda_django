@@ -128,3 +128,8 @@ STATICFILES_DIRS = [
 # media
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+try:
+    from project.local_settings import *
+except ImportError:
+    ...
