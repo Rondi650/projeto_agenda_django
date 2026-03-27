@@ -4,15 +4,19 @@ from django.http import Http404
 from django.core.handlers.wsgi import WSGIRequest
 from django.db.models import Q
 from rich import print
-
+from django.core.paginator import Paginator
 
 def index(request: WSGIRequest):
     contacts = Contact.objects.all() \
         .filter(show=True) \
-        .order_by('-id')[:10]
+        .order_by('-id')
+    
+    paginator = Paginator(contacts, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     context = {
-        'contacts': contacts,
+        'page_obj': page_obj,
         'title': 'Contatos'
     }
 
@@ -36,10 +40,12 @@ def search(request: WSGIRequest):
                 Q(last_name__icontains=search_value)) \
         .order_by('-id')
     
-    print(contacts.query)
+    paginator = Paginator(contacts, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     context = {
-        'contacts': contacts,
+        'page_obj': page_obj,
         'title': 'Search'
     }
 
