@@ -3,7 +3,6 @@ from contact.models import Contact
 from django.http import Http404
 from django.core.handlers.wsgi import WSGIRequest
 from django.db.models import Q
-from rich import print
 from django.core.paginator import Paginator
 
 def index(request: WSGIRequest):
