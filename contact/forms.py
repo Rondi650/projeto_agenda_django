@@ -1,10 +1,5 @@
-from typing import Any, Mapping
-from unicodedata import category
-
 from django.core.exceptions import ValidationError
 from django import forms
-
-
 from contact.models import Contact
 
 
@@ -20,7 +15,7 @@ class ContactForm(forms.ModelForm):
     first_name = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                # 'placeholder': 'Novo placeholder'
+                'placeholder': 'Novo placeholder'
             }
         ),
         # label='Seu primeiro nome',
