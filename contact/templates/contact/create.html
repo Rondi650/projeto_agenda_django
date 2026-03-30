@@ -1,4 +1,4 @@
-{% extends "global/base.html" %}
+{% extends 'global/base.html' %}
 
 {% block content %}
   <div class="form-wrapper">
@@ -10,22 +10,28 @@
       method="POST"
       enctype="multipart/form-data"
     >
-        {% csrf_token %}
-
-      {% for field in form %}
+      {% csrf_token %}      
+      
       <div class="form-content">
-        <div class="form-group">
-          <label for="{{field.id_for_label}}">{{field.label}}</label>
-          {{field}}
-          {{field.errors}}
 
-          {% if field.help_text %}
-            <p class="help-text">{{field.help_text}}</p>
+        {% for field in form %}
+          <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {{ field.errors }}
+
+            {% if field.help_text %}
+              <p class="help-text">{{ field.help_text }}</p>
+            {% endif %}
+          </div>
+
+          {% if field.name == 'picture' and field.value.url %}
+            <div class="form-group">
+              <img src="{{ field.value.url }}" alt="">
+            </div>
           {% endif %}
-
-        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
 
       {% if form.non_field_errors %}
         <div class="form-content">
@@ -37,7 +43,6 @@
         </div>
       {% endif %}
 
-      
       <div class="form-content">
         <div class="form-group">
           <button class="btn" type="submit">Send</button>

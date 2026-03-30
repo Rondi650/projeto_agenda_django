@@ -10,7 +10,7 @@ def create(request: WSGIRequest):
     print(form_action)
 
     if request.method == 'POST':
-        form = ContactForm(request.POST)
+        form = ContactForm(request.POST, request.FILES)
 
         context = {
             'form': form,
@@ -47,7 +47,7 @@ def update(request: WSGIRequest, contact_id):
     print(form_action)
 
     if request.method == 'POST':
-        form = ContactForm(request.POST, instance=contact)
+        form = ContactForm(request.POST, request.FILES, instance=contact)
 
         context = {
             'form': form,

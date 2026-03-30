@@ -4,32 +4,20 @@ from contact.models import Contact
 
 
 class ContactForm(forms.ModelForm):
-    # ------ CRIACAO --------
-    # modo 1
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        print('Print do attr: ', self.fields['first_name'].widget.attrs)
-
-    # modo 2
-    first_name = forms.CharField(
-        widget=forms.TextInput(
+    pictures = forms.ImageField(
+        widget=forms.FileInput(
             attrs={
-                'placeholder': 'Novo placeholder'
+                'accept': 'image/*'
             }
-        ),
-        # label='Seu primeiro nome',
-        # help_text='Texto de ajuda para seu usuario'
+        ), 
+        required=False
     )
 
-    # modo 3
     class Meta:
         model = Contact
         fields = 'first_name', 'last_name', 'phone', \
-                 'email', 'description', 'category'
-        # widgets = {
-        #     'first_name': forms.TextInput(attrs={'placeholder': 'Seu nome'})
-        # }
+                 'email', 'description', 'category', \
+                 'pictures'
 
     # ------ ERROS --------
     def clean(self):
