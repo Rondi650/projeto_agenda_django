@@ -115,6 +115,26 @@ svg {
   overflow-x: auto;
 }
 
+.contact-links {
+  margin-block: calc(var(--small-font-size) * 2);
+  display: flex;
+  align-items: center;
+  gap: 0 var(--spacing);
+}
+
+.btn-link {
+  font-size: var(--small-font-size);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 1rem;
+  display: block;
+  line-height: var(--small-font-size);
+}
+
+.btn-delete {
+  background: tomato !important ;
+}
+
 .contacts-table {
   width: 100%;
   min-width: var(--table-min-width);

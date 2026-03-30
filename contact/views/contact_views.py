@@ -5,11 +5,12 @@ from django.core.handlers.wsgi import WSGIRequest
 from django.db.models import Q
 from django.core.paginator import Paginator
 
+
 def index(request: WSGIRequest):
     contacts = Contact.objects.all() \
         .filter(show=True) \
         .order_by('-id')
-    
+
     paginator = Paginator(contacts, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -25,20 +26,21 @@ def index(request: WSGIRequest):
         context
     )
 
+
 def search(request: WSGIRequest):
     search_value = request.GET.get('q', '').strip()
-    
+
     if search_value == '':
         return redirect('contact:index')
 
     contacts = Contact.objects.all() \
         .filter(show=True) \
-        .filter(Q(first_name__icontains=search_value) | 
-                Q(phone__icontains=search_value) | 
-                Q(email__icontains=search_value) | 
+        .filter(Q(first_name__icontains=search_value) |
+                Q(phone__icontains=search_value) |
+                Q(email__icontains=search_value) |
                 Q(last_name__icontains=search_value)) \
         .order_by('-id')
-    
+
     paginator = Paginator(contacts, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -60,6 +62,7 @@ def contact(request: WSGIRequest, contact_id: int):
         id=contact_id,
         show=True
     ).first()
+    print(single_contact)
 
     if single_contact is None:
         raise Http404
