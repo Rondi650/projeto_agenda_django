@@ -1,13 +1,14 @@
-from django import shortcuts
-from django.shortcuts import render, redirect, get_object_or_404
-from django.core.handlers.wsgi import WSGIRequest
-from contact.forms import ContactForm
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+
+from contact.forms import ContactForm
 from contact.models import Contact
 
-def create(request: WSGIRequest):
+
+@login_required(login_url='contact:login')
+def create(request):
     form_action = reverse('contact:create')
-    print(form_action)
 
     if request.method == 'POST':
         form = ContactForm(request.POST, request.FILES)
@@ -18,7 +19,9 @@ def create(request: WSGIRequest):
         }
 
         if form.is_valid():
-            contact = form.save()
+            contact = form.save(commit=False)
+            contact.owner = request.user
+            contact.save()
             return redirect('contact:update', contact_id=contact.pk)
 
         return render(
@@ -38,13 +41,13 @@ def create(request: WSGIRequest):
         context
     )
 
-def update(request: WSGIRequest, contact_id):
+
+@login_required(login_url='contact:login')
+def update(request, contact_id):
     contact = get_object_or_404(
-        Contact, pk=contact_id, show=True
+        Contact, pk=contact_id, show=True, owner=request.user
     )
-    print(contact)
     form_action = reverse('contact:update', args=(contact_id,))
-    print(form_action)
 
     if request.method == 'POST':
         form = ContactForm(request.POST, request.FILES, instance=contact)
@@ -75,9 +78,11 @@ def update(request: WSGIRequest, contact_id):
         context
     )
 
-def delete(request: WSGIRequest, contact_id):
+
+@login_required(login_url='contact:login')
+def delete(request, contact_id):
     contact = get_object_or_404(
-        Contact, pk=contact_id, show=True
+        Contact, pk=contact_id, show=True, owner=request.user
     )
     confirmation = request.POST.get('confirmation', 'no')
 

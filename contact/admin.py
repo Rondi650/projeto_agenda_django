@@ -1,19 +1,21 @@
 from django.contrib import admin
-from contact.models import Contact, Category
 
-# Register your models here.
+from contact import models
 
-@admin.register(Contact)
+
+@admin.register(models.Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = 'id','first_name', 'last_name', 'phone', 'show',
-    ordering = '-id', # o - na frente deixa em ordem decrescente
-    search_fields = 'id', 'first_name', 'last_name'
-    list_per_page = 20
+    list_display = 'id', 'first_name', 'last_name', 'phone', 'show',
+    ordering = '-id',
+    # list_filter = 'created_date',
+    search_fields = 'id', 'first_name', 'last_name',
+    list_per_page = 10
     list_max_show_all = 200
     list_editable = 'first_name', 'last_name', 'show',
-    list_display_links = 'id', 'phone'
+    list_display_links = 'id', 'phone',
 
-@admin.register(Category)
+
+@admin.register(models.Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = 'name',
-    ordering = '-name', # o - na frente deixa em ordem decrescente
+    ordering = '-id',

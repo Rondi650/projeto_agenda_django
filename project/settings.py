@@ -127,6 +127,10 @@ STATIC_ROOT = BASE_DIR / 'static'  # collectstatic
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# Default redirect URL after login
+LOGIN_URL = 'contact:login'
+LOGIN_REDIRECT_URL = 'contact:index'
+
 try:
     from project.local_settings import *
 except ImportError:
