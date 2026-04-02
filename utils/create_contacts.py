@@ -24,24 +24,22 @@ if __name__ == '__main__':
     Contact.objects.all().delete()
     Category.objects.all().delete()
 
+    fake = faker.Faker('pt_BR')
     categories = ['Amigos', 'Família', 'Conhecidos']
 
-    django_categories = []
-    for i, name in enumerate(categories):
-        django_categories.append(Category(name=name))
-        django_categories[i].save()
-    
-    django_categories = [Category(65,'Amigos'), Category(66, 'Família'),
-                         Category(67, 'Conhecidos')]
+    django_categories = [Category(name=name) for name in categories]
+
+    for category in django_categories:
+        category.save()
 
     django_contacts = []
-    fake = faker.Faker('pt_BR')
+
     for _ in range(NUMBER_OF_OBJECTS):
         profile = fake.profile()
         email = profile['mail']
-        first_name, last_name = profile['name'].split(' ', maxsplit=1)
+        first_name, last_name = profile['name'].split(' ', 1)
         phone = fake.phone_number()
-        created_date = fake.date_this_decade()
+        created_date: datetime = fake.date_this_year()
         description = fake.text(max_nb_chars=100)
         category = choice(django_categories)
 

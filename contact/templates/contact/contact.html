@@ -13,9 +13,9 @@
     <p><b>Description:</b> {{ contact.description }}</p>
     <p><b>Category:</b> {{ contact.category.name }}</p>
 
-    {% if contact.picture %}
+    {% if contact.pictures %}
       <p>
-        <img src="{{ contact.picture.url }}" alt="{{ contact.first_name }} {{ contact.last_name }}">
+        <img src="{{ contact.pictures.url }}" alt="{{ contact.first_name }} {{ contact.last_name }}">
       </p>
     {% endif %}
 

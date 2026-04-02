@@ -8,7 +8,7 @@ from . import models
 
 
 class ContactForm(forms.ModelForm):
-    picture = forms.ImageField(
+    pictures = forms.ImageField(
         widget=forms.FileInput(
             attrs={
                 'accept': 'image/*',
@@ -22,7 +22,7 @@ class ContactForm(forms.ModelForm):
         fields = (
             'first_name', 'last_name', 'phone',
             'email', 'description', 'category',
-            'picture',
+            'pictures',
         )
 
     def clean(self):
