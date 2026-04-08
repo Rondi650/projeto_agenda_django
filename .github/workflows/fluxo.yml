@@ -24,6 +24,6 @@ jobs:
           script: |
             cd ~/projeto_agenda_django
             git pull origin main
-            python manage.py migrate
-            python manage.py collectstatic --noinput
+            python3 manage.py migrate
+            python3 manage.py collectstatic --noinput
             sudo systemctl restart nginx
