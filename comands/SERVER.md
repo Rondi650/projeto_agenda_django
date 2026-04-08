@@ -28,19 +28,28 @@ ssh usuário@IP_SERVIDOR
 ### Comandos iniciais
 
 ```
+PADRAO
 sudo apt update -y
 sudo apt upgrade -y
 sudo apt autoremove -y
 sudo apt install build-essential -y
 
-sudo add-apt-repository ppa:deadsnakes/ppa
-sudo apt install python3.11 python3.11-venv -y
+MYSQL
+sudo apt install python3-dev default-libmysqlclient-dev -y
+sudo apt install pkg-config -y
 
+NGINX
 sudo apt install nginx -y
 sudo apt install certbot python3-certbot-nginx -y
+
+POSTGRES
 sudo apt install postgresql postgresql-contrib -y
 sudo apt install libpq-dev -y
+
+SERVIDOR JA VEM
 sudo apt install git -y
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt install python3.11 python3.11-venv -y
 ```
 
 ### Configurando o git
