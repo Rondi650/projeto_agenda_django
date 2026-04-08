@@ -9,7 +9,7 @@ from contact.models import Contact
 @login_required(login_url='contact:login')
 def index(request):
     contacts = Contact.objects \
-        .filter(show=True)\
+        .filter(show=True, owner=request.user)\
         .order_by('-id')
 
     paginator = Paginator(contacts, 10)
@@ -36,7 +36,7 @@ def search(request):
         return redirect('contact:index')
 
     contacts = Contact.objects \
-        .filter(show=True)\
+        .filter(show=True, owner=request.user)\
         .filter(
             Q(first_name__icontains=search_value) |
             Q(last_name__icontains=search_value) |
@@ -66,7 +66,7 @@ def search(request):
 def contact(request, contact_id):
     # single_contact = Contact.objects.filter(pk=contact_id).first()
     single_contact = get_object_or_404(
-        Contact, pk=contact_id, show=True
+        Contact, pk=contact_id, show=True, owner=request.user
     )
     site_title = f'{single_contact.first_name} {single_contact.last_name} - '
 
