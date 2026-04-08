@@ -26,4 +26,4 @@ jobs:
             git pull origin main
             python manage.py migrate
             python manage.py collectstatic --noinput
-            systemctl restart nginx
+            sudo systemctl restart nginx
