@@ -14,9 +14,9 @@
     <p><b>Category:</b> {{ contact.category.name }}</p>
 
     {% if contact.pictures %}
-      <p>
-        <img src="{{ contact.pictures.url }}" alt="{{ contact.first_name }} {{ contact.last_name }}">
-      </p>
+      <div class="contact-image-wrapper">
+        <img src="{{ contact.pictures.url }}" alt="{{ contact.first_name }} {{ contact.last_name }}" class="contact-image">
+      </div>
     {% endif %}
 
     {% if user == contact.owner %}

@@ -254,6 +254,7 @@ svg {
   margin: 1rem 0;
   line-height: 1.8;
   color: #cbd5e1;
+  word-break: break-word;
 }
 
 .contact-links {
@@ -502,8 +503,8 @@ svg {
   background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%) !important;
 }
 
-/* Tabela responsiva para celulares */
-@media (max-width: 768px) {
+/* Tabela responsiva para celulares - Tablet e Mobile */
+@media (max-width: 900px) {
   .responsive-table {
     overflow-x: visible;
   }
@@ -526,7 +527,7 @@ svg {
 
   .table-row {
     display: block;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
     background: #0f172a !important;
     border: 1px solid #334155;
     border-radius: var(--default-border-radius);
@@ -544,28 +545,34 @@ svg {
   }
 
   .table-cel {
-    display: block;
-    padding: 0.75rem 0;
-    border: none;
-    position: relative;
-    padding-left: 40%;
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #1e293b;
     word-wrap: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .table-cel:last-child {
+    border-bottom: none;
   }
 
   .table-cel::before {
     content: attr(data-label);
-    position: absolute;
-    left: 0;
+    flex-shrink: 0;
+    width: 7rem;
     font-weight: 600;
     color: #60a5fa;
-    font-size: var(--smaller-font-size);
+    font-size: 1rem;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.4px;
+    line-height: 1.6;
   }
 }
 
-/* Responsivos */
-@media (max-width: 768px) {
+/* Responsivos - Tablet (600px a 900px) */
+@media (max-width: 900px) and (min-width: 600px) {
   :root {
     --biggest-font-size: 2.8rem;
     --bigger-font-size: 2.2rem;
@@ -590,7 +597,7 @@ svg {
   }
 
   .menu-link {
-    padding: 0.6rem 1rem;
+    padding: 0.7rem 1.2rem;
     font-size: var(--smaller-font-size);
   }
 
@@ -601,56 +608,34 @@ svg {
 
   .content {
     margin: 1.5rem auto;
-    padding: 1rem;
-  }
-
-  .responsive-table {
-    overflow-x: auto;
-  }
-
-  .contacts-table {
-    font-size: var(--smaller-font-size);
-  }
-
-  .table-cel,
-  .table-header {
-    padding: 0.8rem 0.5rem;
+    padding: 1.2rem;
   }
 
   .form-wrapper {
-    margin: 1rem auto;
-    padding: 1rem;
+    margin: 1.2rem auto;
+    padding: 1.2rem;
   }
 
   .single-contact {
     margin: 1rem 0;
-    padding: 1rem;
+    padding: 1.2rem;
   }
 
   .single-contact h1 {
     font-size: var(--big-font-size);
+    margin-bottom: 1rem;
   }
 
   .btn,
   .btn-link {
-    padding: 0.7rem 1.2rem;
+    padding: 0.8rem 1.5rem;
     font-size: var(--smaller-font-size);
   }
 
   .contact-links {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .contact-links a,
-  .contact-links form {
-    width: 100%;
-  }
-
-  .contact-links a,
-  .contact-links button {
-    display: block;
-    text-align: center;
+    flex-direction: row;
+    gap: 0.8rem;
+    flex-wrap: wrap;
   }
 
   .pagination {
@@ -663,82 +648,174 @@ svg {
 
   .pagination .step-links a,
   .pagination .step-links span {
-    padding: 0.4rem 0.8rem;
+    padding: 0.5rem 0.9rem;
     font-size: var(--smallest-font-size);
   }
 }
 
-@media (max-width: 480px) {
+/* Responsivos - Mobile (até 600px) */
+@media (max-width: 599px) {
   :root {
-    --spacing: 1rem;
+    --spacing: 1.2rem;
+    --biggest-font-size: 2.2rem;
+    --bigger-font-size: 1.8rem;
+    --big-font-size: 1.6rem;
+    --medium-font-size: 1.4rem;
+    --small-font-size: 1.5rem;
+    --smaller-font-size: 1.3rem;
+    --smallest-font-size: 1.2rem;
   }
 
   .header {
-    padding: 1rem var(--spacing);
+    padding: 1.5rem var(--spacing);
   }
 
   .header-heading {
     font-size: 2rem;
+    letter-spacing: 0;
+  }
+
+  .menu {
+    margin: 1rem 0 0 0;
+  }
+
+  .menu-list {
+    gap: 0.4rem;
+    justify-content: center;
   }
 
   .menu-link {
-    padding: 0.6rem 0.8rem;
-    font-size: var(--smallest-font-size);
+    padding: 0.6rem 1rem;
+    font-size: 1.3rem;
+    letter-spacing: 0;
+  }
+
+  .search-input {
+    max-width: 100%;
+    padding: 0.9rem 1.2rem;
+    font-size: 1.4rem;
   }
 
   .content {
-    margin: 1rem auto;
-    padding: 0.8rem;
+    margin: 1.2rem auto;
+    padding: 1.2rem;
   }
 
   .table-caption {
-    font-size: var(--medium-font-size);
+    font-size: 1.6rem;
+    padding: 0.8rem 0;
   }
 
   .table-row {
     margin-bottom: 1rem;
-    padding: 0.75rem;
-  }
-
-  .table-cel {
-    padding: 0.6rem 0;
-    padding-left: 45%;
-    font-size: var(--smallest-font-size);
-  }
-
-  .table-cel::before {
-    font-size: 0.75rem;
-  }
-
-  .table-link {
-    font-size: var(--smallest-font-size);
-    word-break: break-all;
-  }
-
-  .single-contact {
     padding: 0.8rem;
   }
 
-  .single-contact h1 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
+  .table-cel {
+    gap: 0.6rem;
+    padding: 0.45rem 0;
+    font-size: 1.2rem;
+  }
+
+  .table-cel::before {
+    width: 6rem;
+    font-size: 0.9rem;
+  }
+
+  .table-link {
+    font-size: 1.2rem;
+    word-break: break-word;
+  }
+
+  .form-wrapper {
+    margin: 0.8rem auto;
+    padding: 0.9rem;
+  }
+
+  .form-group {
+    padding-bottom: 0.8rem;
+  }
+
+  .form-group {
+    padding-bottom: 1rem;
+    gap: 0.4rem;
   }
 
   .form-group input,
   .form-group textarea,
   .form-group select {
-    padding: 0.8rem 0.75rem;
-    font-size: var(--smallest-font-size);
+    padding: 0.85rem 1rem;
+    font-size: 1.4rem;
+  }
+
+  .form-group label {
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .single-contact {
+    margin: 1rem 0;
+    padding: 1.2rem;
+  }
+
+  .single-contact h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .single-contact p {
+    margin: 0.8rem 0;
+    font-size: 1.4rem;
+    line-height: 1.7;
   }
 
   .btn,
   .btn-link {
-    padding: 0.6rem 1rem;
+    padding: 0.9rem 1.2rem;
+    font-size: 1.4rem;
     width: 100%;
+    display: block;
+    text-align: center;
+    box-sizing: border-box;
   }
 
   .contact-links {
-    gap: 0.4rem;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 1.2rem;
+  }
+
+  .contact-links a,
+  .contact-links form {
+    width: 100%;
+  }
+
+  .contact-links button {
+    width: 100%;
+  }
+
+  .pagination {
+    padding: 1.2rem 0;
+  }
+
+  .pagination .step-links {
+    gap: 0.3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .pagination .step-links a,
+  .pagination .step-links span {
+    padding: 0.5rem 0.8rem;
+    font-size: 1.2rem;
+  }
+
+  .message {
+    padding: 1rem 1.2rem;
+    font-size: 1.3rem;
+    margin: 1rem auto;
+    text-align: left;
   }
 }
 
@@ -775,4 +852,42 @@ img {
   border-radius: var(--default-border-radius);
   max-width: 100%;
   height: auto;
+  display: block;
+}
+
+.contact-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  width: 100%;
+}
+
+.contact-image {
+  max-width: 85%;
+  height: auto;
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--default-border-radius);
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  .contact-image-wrapper {
+    margin: 1.5rem 0;
+  }
+
+  .contact-image {
+    max-width: 95%;
+  }
+}
+
+@media (max-width: 599px) {
+  .contact-image-wrapper {
+    margin: 1rem 0;
+  }
+
+  .contact-image {
+    max-width: 100%;
+    margin: 0 auto;
+  }
 }
