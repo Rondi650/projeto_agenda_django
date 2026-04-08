@@ -21,24 +21,24 @@
         <tbody>
           {% for contact in page_obj %}
             <tr class="table-row">
-              <td class="table-cel">
-                <a 
-                  class="table-link" 
+              <td class="table-cel" data-label="ID">
+                <a
+                  class="table-link"
                   href="{% url 'contact:contact' contact.id %}"
                 >
                   {{ contact.id }}
                 </a>
               </td>
-              <td class="table-cel">
+              <td class="table-cel" data-label="Nome">
                 {{ contact.first_name }}
               </td>
-              <td class="table-cel">
+              <td class="table-cel" data-label="Sobrenome">
                 {{ contact.last_name }}
               </td>
-              <td class="table-cel">
+              <td class="table-cel" data-label="Telefone">
                 {{ contact.phone }}
               </td>
-              <td class="table-cel">
+              <td class="table-cel" data-label="Email">
                 {{ contact.email }}
               </td>
             </tr>
