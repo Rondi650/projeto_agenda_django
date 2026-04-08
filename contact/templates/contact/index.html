@@ -1,16 +1,6 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-
-    {% if user.is_authenticated %}
-        <p>Olá, {{ user.username }}!</p>
-        <p>Email: {{ user.email }}</p>
-        <a href="{% url 'contact:logout' %}">Logout</a>
-    {% else %}
-        <p>Você não está logado</p>
-        <a href="{% url 'contact:login' %}">Login</a>
-    {% endif %}
-
   {% if page_obj %}
     <div class="responsive-table">
       <table class="contacts-table">
