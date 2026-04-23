@@ -1,12 +1,16 @@
+from typing import cast
+
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
+from django.http import HttpRequest
 
 from contact.forms import RegisterForm, RegisterUpdateForm
 
 
-def register(request):
+def register(request: HttpRequest):
     form = RegisterForm()
 
     if request.method == 'POST':
@@ -27,8 +31,9 @@ def register(request):
 
 
 @login_required(login_url='contact:login')
-def user_update(request):
-    form = RegisterUpdateForm(instance=request.user)
+def user_update(request: HttpRequest):
+    user = cast(User, request.user)
+    form = RegisterUpdateForm(instance=user)
 
     if request.method != 'POST':
         return render(
@@ -39,7 +44,7 @@ def user_update(request):
             }
         )
 
-    form = RegisterUpdateForm(data=request.POST, instance=request.user)
+    form = RegisterUpdateForm(data=request.POST, instance=user)
 
     if not form.is_valid():
         return render(
@@ -54,7 +59,7 @@ def user_update(request):
     return redirect('contact:user_update')
 
 
-def login_view(request):
+def login_view(request: HttpRequest):
     form = AuthenticationForm(request)
 
     if request.method == 'POST':
@@ -77,6 +82,6 @@ def login_view(request):
 
 
 @login_required(login_url='contact:login')
-def logout_view(request):
+def logout_view(request: HttpRequest):
     auth.logout(request)
     return redirect('contact:login')
