@@ -1,0 +1,45 @@
+services:
+  agenda_psql:
+    container_name: agenda_psql
+    restart: unless-stopped
+    build:
+      context: .
+    networks:
+      - proxy
+      - default
+    volumes:
+      - ./static:/data/web/static
+      - ./media:/data/web/media
+    env_file:
+      - ./.env
+    environment:
+      - POSTGRES_HOST=psql
+    depends_on:
+      - psql
+    labels:
+      - "traefik.enable=true"                                                 
+      - "traefik.http.routers.agenda.rule=Host(`agenda.docker.localhost`)"             
+      - "traefik.http.routers.agenda.entrypoints=websecure"                    
+      - "traefik.http.routers.agenda.tls=true"   
+      - "traefik.http.services.agenda.loadbalancer.server.port=8000"
+  
+  nginx-static:
+    container_name: nginx-static
+    restart: unless-stopped
+    image: nginx:alpine
+    networks:
+      - proxy
+    volumes:
+      - ./static:/data/web/static:ro
+      - ./media:/data/web/media:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.static.rule=Host(`agenda.docker.localhost`) && (PathPrefix(`/static/`) || PathPrefix(`/media/`))"
+      - "traefik.http.routers.static.entrypoints=websecure"
+      - "traefik.http.routers.static.tls=true"   
+      - "traefik.http.services.static.loadbalancer.server.port=80"
+
+networks:
+  proxy:
+    external: true                         
