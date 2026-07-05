@@ -30,16 +30,36 @@
                 </a>
               </td>
               <td class="table-cel" data-label="Nome">
-                {{ contact.first_name }}
+                <a
+                  class="table-link"
+                  href="{% url 'contact:contact' contact.id %}"
+                >
+                  {{ contact.first_name }}
+                </a>
               </td>
               <td class="table-cel" data-label="Sobrenome">
-                {{ contact.last_name }}
+                <a
+                  class="table-link"
+                  href="{% url 'contact:contact' contact.id %}"
+                >
+                  {{ contact.last_name }}
+                </a>
               </td>
               <td class="table-cel" data-label="Telefone">
-                {{ contact.phone }}
+                <a
+                  class="table-link"
+                  href="{% url 'contact:contact' contact.id %}"
+                >
+                  {{ contact.phone }}
+                </a>
               </td>
               <td class="table-cel" data-label="Email">
-                {{ contact.email }}
+                <a
+                  class="table-link"
+                  href="{% url 'contact:contact' contact.id %}"
+                >
+                  {{ contact.email }}
+                </a>
               </td>
             </tr>
           {% endfor %}

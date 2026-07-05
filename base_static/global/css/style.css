@@ -209,6 +209,10 @@ svg {
   position: relative;
 }
 
+.table-cel .table-link {
+  color: inherit;
+}
+
 .table-link::after {
   content: '';
   position: absolute;
