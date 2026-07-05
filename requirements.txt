@@ -8,7 +8,7 @@ mdurl==0.1.2
 mysql-connector-python==9.6.0
 packaging==26.0
 pillow==12.1.1
-psycopg==3.3.3
+psycopg2-binary==2.9.10 # para postgres
 Pygments==2.19.2
 python-dotenv==1.2.2
 rich==14.3.3

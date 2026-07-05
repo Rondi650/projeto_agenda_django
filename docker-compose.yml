@@ -12,10 +12,6 @@ services:
       - ./media:/data/web/media
     env_file:
       - ./.env
-    environment:
-      - POSTGRES_HOST=psql
-    depends_on:
-      - psql
     labels:
       - "traefik.enable=true"                                                 
       - "traefik.http.routers.agenda.rule=Host(`agenda.docker.localhost`)"             
@@ -23,8 +19,8 @@ services:
       - "traefik.http.routers.agenda.tls=true"   
       - "traefik.http.services.agenda.loadbalancer.server.port=8000"
   
-  nginx-static:
-    container_name: nginx-static
+  nginx-static-agenda:
+    container_name: nginx-static-agenda
     restart: unless-stopped
     image: nginx:alpine
     networks:
@@ -35,11 +31,14 @@ services:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.static.rule=Host(`agenda.docker.localhost`) && (PathPrefix(`/static/`) || PathPrefix(`/media/`))"
-      - "traefik.http.routers.static.entrypoints=websecure"
-      - "traefik.http.routers.static.tls=true"   
-      - "traefik.http.services.static.loadbalancer.server.port=80"
+      - "traefik.http.routers.static-agenda.rule=Host(`agenda.docker.localhost`) && (PathPrefix(`/static/`) || PathPrefix(`/media/`))"
+      - "traefik.http.routers.static-agenda.entrypoints=websecure"
+      - "traefik.http.routers.static-agenda.tls=true"   
+      - "traefik.http.services.static-agenda.loadbalancer.server.port=80"
 
 networks:
+  default:
+    external:
+      name: blog_default
   proxy:
-    external: true                         
+    external: true                      
