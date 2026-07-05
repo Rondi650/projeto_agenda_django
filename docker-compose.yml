@@ -8,8 +8,8 @@ services:
       - proxy
       - default
     volumes:
-      - ./static:/data/web/static
-      - ./media:/data/web/media
+      - ./static:/djangoapp/static
+      - ./media:/djangoapp/media
     env_file:
       - ./.env
     labels:
@@ -26,8 +26,8 @@ services:
     networks:
       - proxy
     volumes:
-      - ./static:/data/web/static:ro
-      - ./media:/data/web/media:ro
+      - ./static:/djangoapp/static:ro
+      - ./media:/djangoapp/media:ro
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
     labels:
       - "traefik.enable=true"

@@ -137,13 +137,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 # static
-STATIC_URL = 'static/'
-STATICFILES_DIRS = (
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
     BASE_DIR / 'base_static',
-)
+]
 STATIC_ROOT = BASE_DIR / 'static'  # collectstatic
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default redirect URL after login
